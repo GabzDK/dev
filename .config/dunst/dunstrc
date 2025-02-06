@@ -1,0 +1,29 @@
+[global]
+width = 280 
+offset = 15x35
+
+padding = 10
+horizontal_padding = 10
+frame_width = 1
+gap_size = 3
+font = "MesloLGS NF 10"
+
+corner_radius = 10
+
+background = "#141414"
+foreground = "#e0def4"
+
+[urgency_low]
+background = "#141414"
+highlight = "#31748f"
+frame_color = "#26233a"
+
+[urgency_normal]
+background = "#141414"
+highlight = "#f6c177"
+frame_color = "#26233a"
+
+[urgency_critical]
+background = "141414"
+highlight = "#eb6f92"
+frame_color = "#26233a"
