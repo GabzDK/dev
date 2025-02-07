@@ -17,5 +17,13 @@ return {
             "MunifTanjim/nui.nvim",
             -- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
         },
+        config = function()
+            require("neo-tree").setup({
+                window = {
+                    position = "right", -- Set position to "right" instead of "left"
+                },
+                -- other configurations as needed
+            })
+        end,
     },
 }

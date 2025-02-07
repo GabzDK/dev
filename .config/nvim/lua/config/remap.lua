@@ -23,7 +23,7 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 vim.keymap.set("n", "<leader>th", "<cmd>Telescope themes<CR>")
 -- vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
-vim.api.nvim_set_keymap("n", "<leader>pv", ":Neotree toggle<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>pv", ":Neotree toggle position=right <CR>", { noremap = true, silent = true })
 
 -- Debug
 

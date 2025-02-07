@@ -13,7 +13,7 @@ return {
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
             bigfile = { enabled = true },
-            dashboard = { enabled = false },
+            dashboard = { enabled = true },
             explorer = { enabled = false },
             indent = { enabled = false },
             input = { enabled = true },
@@ -43,6 +43,6 @@ return {
             --   If not available, we use `mini` as the fallback
             "rcarriga/nvim-notify",
         },
-        enabled = true,
+        enabled = false,
     },
 }

@@ -4,6 +4,7 @@
 SESSION_NAME="dev_session"
 DIR1="/home/kali/work/fretemax-workspace/fretemax-lambdas/"
 DIR2="/home/kali/work/fretemax-workspace/fretemax-frontend/"
+DIR3="/home/kali/work/fretemax-workspace/"
 
 # Start a new tmux session and create the first window
 tmux new-session -d -s $SESSION_NAME -n first_window
@@ -17,5 +18,12 @@ tmux send-keys -t $SESSION_NAME:first_window.0 "cd $DIR1 && npm run start" C-m
 # Navigate to the second directory and run npm run dev in the second pane
 tmux send-keys -t $SESSION_NAME:first_window.1 "cd $DIR2 && npm run dev" C-m
 
+# Create a new window for DIR3
+tmux new-window -t $SESSION_NAME -n second_window
+
+# Navigate to the third directory in the new window
+tmux send-keys -t $SESSION_NAME:second_window "cd $DIR3 && nvim" C-m
+
 # Attach to the tmux session
 tmux attach -t $SESSION_NAME
+tmux switch-client -t $SESSION_NAME
