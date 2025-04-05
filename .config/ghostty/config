@@ -1,0 +1,9 @@
+font-family = IosevkaCustom
+
+theme = Batman 
+# theme = gruber-darker
+background-opacity = 0.95
+
+shell-integration-features = no-cursor,no-sudo,no-title
+gtk-titlebar = false
+window-decoration = false

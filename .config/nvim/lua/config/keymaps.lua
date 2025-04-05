@@ -1,3 +1,6 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
 -- remaps
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -22,10 +25,4 @@ vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
 
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 vim.keymap.set("n", "<leader>th", "<cmd>Telescope themes<CR>")
--- vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
-vim.api.nvim_set_keymap("n", "<leader>pv", ":Neotree toggle position=right <CR>", { noremap = true, silent = true })
-
--- Debug
-
-vim.keymap.set("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>", { desc = "Add breakpoint at line" })
-vim.keymap.set("n", "<leader>dr", "<cmd> DapContinue <CR>", { desc = "Run or continue the debugger" })
+vim.keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")

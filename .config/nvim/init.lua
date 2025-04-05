@@ -1,7 +1,2 @@
--- Lazy fix
-vim.g.mapleader = " "
-vim.o.statusline = "%f %y %m %r %= %l/%L %c"
-
+-- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
-require("config.options")
-require("config.remap")
