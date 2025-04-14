@@ -1,0 +1,5 @@
+#!/bin/bash
+
+xrandr \
+    --output eDP-1-2 --mode 2560x1600 --scale 0.8x0.8 --pos 0x0 -r 240 \
+    --output DP-0 --mode 1920x1080 --primary -r 180 --pos 2048x0

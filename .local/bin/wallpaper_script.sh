@@ -1,4 +1,16 @@
 #!/bin/sh
 
-wallpaper=$(ls ~/Pictures/Wallpapers | dmenu -i -l 50) 
-[ $wallpaper -z ] || feh --bg-fill /home/kali/Pictures/Wallpapers//$wallpaper  
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+
+[ ! -d "$WALLPAPER_DIR" ] && {
+    notify-send "Wallpaper Picker" "Directory not found: $WALLPAPER_DIR"
+    exit 1
+}
+
+selected=$(sxiv -tqo "$WALLPAPER_DIR" | head -n 1)
+
+[ -z "$selected" ] && exit
+
+feh --bg-fill "$selected"
+
+notify-send "Wallpaper Set" "$(basename "$selected")"

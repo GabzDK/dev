@@ -39,9 +39,7 @@ return {
   {
     "blazkowolf/gruber-darker.nvim",
     config = function()
-      require("gruber-darker").setup({
-        disable_background = true,
-      })
+      require("gruber-darker").setup({})
       ColorMyPencils()
     end,
   },

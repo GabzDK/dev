@@ -6,14 +6,31 @@ plugins=(git fast-syntax-highlighting  zsh-autosuggestions zsh-syntax-highlighti
 
 # num_dirs=2 
 # truncated_path="%F{white}%$num_dirs~%f "
-# decoration="%F{red} "
+# decoration="%F{green}󰘧"
 # Left part of prompt
 # PROMPT='$decoration $truncated_path'
+# ZSH_THEME="bureau"
 
-ZSH_THEME="robbyrussell"
+setopt prompt_subst
 
-# Input in bold
-zle_highlight=(default:bold)
+FG_USER="%F{#86c1b9}"    # Teal
+FG_HOST="%F{#86c1b9}"    # Teal
+FG_DIR="%F{#ffdd33}"     # Yellow
+FG_GIT="%F{#f6aa11}"     # Orange
+FG_PROMPT="%F{#f4f4ff}"  # Beige
+RESET="%f"
+
+# Git branch function
+git_branch() {
+  local branch
+  branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+  [[ -n "$branch" ]] && echo " ${FG_GIT}(${branch})${RESET}"
+}
+
+# Prompt setup
+PROMPT='${FG_USER}%n${RESET}@${FG_HOST}%m${RESET} ${FG_DIR}%~${RESET}$(git_branch)
+λ '
+
 
 source $ZSH/oh-my-zsh.sh
 
@@ -54,7 +71,7 @@ fi
 
 # Aliases
 alias cal="khal --color calendar"
-    alias fetch="/home/kali/builds/rfetch/target/release/rfetch"
+    alias fetch="$HOME/.local/bin/fetch"
 
 # Verbosity
 alias \
@@ -117,9 +134,15 @@ source <(fzf --zsh)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+# Rust baby
+. "$HOME/.cargo/env"
+
+
 # fnm
 FNM_PATH="/home/kali/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="/home/kali/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
+fetch

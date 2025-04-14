@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Clean Arch Linux fetch script with Gruber Darker theme
+# Minimalist design without icons
+
+# Gruber Darker Colors
+BEIGE='\033[38;5;223m'  # Primary text color (beige/tan)
+RED='\033[38;5;167m'    # Red accent
+BROWN='\033[38;5;137m'  # Brown accent
+BLUE='\033[38;5;109m'   # Blue accent
+PURPLE='\033[38;5;139m' # Purple accent
+GREEN='\033[38;5;143m'  # Green accent
+GRAY='\033[38;5;246m'   # Secondary text color
+RESET='\033[0m'
+
+# Function to draw a clean separator line
+draw_line() {
+    local cols=$(tput cols)
+    local line=""
+    for ((i = 0; i < cols / 2; i++)); do
+        line+="━"
+    done
+    echo -e "${GRAY}$line${RESET}"
+}
+
+# Get system information
+OS="Arch Linux"
+KERNEL=$(uname -r)
+UPTIME=$(uptime -p | sed 's/up //')
+SHELL=$(basename "$SHELL")
+PACKAGES=$(pacman -Q | wc -l 2>/dev/null || echo "N/A")
+
+# Get hostname with fallbacks
+HOST=$(cat /etc/hostname 2>/dev/null || hostname 2>/dev/null || echo "$(whoami)-pc")
+
+# Get memory information
+MEM_TOTAL=$(free -h | awk '/^Mem:/ {print $2}')
+MEM_USED=$(free -h | awk '/^Mem:/ {print $3}')
+MEM_PERC=$(free | awk '/^Mem:/ {printf "%.1f%%", $3/$2*100}')
+
+# Get CPU information
+CPU=$(grep -m 1 "model name" /proc/cpuinfo | sed 's/model name[[:space:]]*: //' 2>/dev/null || echo "Unknown CPU")
+
+# Get disk usage
+DISK_USED=$(df -h / | awk 'NR==2 {print $3}' 2>/dev/null || echo "N/A")
+DISK_TOTAL=$(df -h / | awk 'NR==2 {print $2}' 2>/dev/null || echo "N/A")
+DISK_PERC=$(df -h / | awk 'NR==2 {print $5}' 2>/dev/null || echo "N/A")
+
+# Clear screen and print header
+clear
+echo
+
+# System name with color
+echo -e "${BLUE}${OS}${RESET}"
+draw_line
+
+# Print system information with aligned labels
+printf "${RED}%-12s${RESET} ${GRAY}%s${RESET}\n" "Host:" "$HOST"
+printf "${PURPLE}%-12s${RESET} ${GRAY}%s${RESET}\n" "Shell:" "$SHELL"
+printf "${BROWN}%-12s${RESET} ${GRAY}%s${RESET}\n" "Kernel:" "$KERNEL"
+printf "${GREEN}%-12s${RESET} ${GRAY}%s${RESET}\n" "Uptime:" "$UPTIME"
+printf "${BLUE}%-12s${RESET} ${GRAY}%s${RESET}\n" "Packages:" "$PACKAGES"
+printf "${RED}%-12s${RESET} ${GRAY}%s${RESET}\n" "CPU:" "$CPU"
+printf "${PURPLE}%-12s${RESET} ${GRAY}%s/%s (%s)${RESET}\n" "Memory:" "$MEM_USED" "$MEM_TOTAL" "$MEM_PERC"
+printf "${GREEN}%-12s${RESET} ${GRAY}%s/%s (%s)${RESET}\n" "Disk:" "$DISK_USED" "$DISK_TOTAL" "$DISK_PERC"
+
+# Footer
+draw_line
+echo -e "${GRAY}$(date +"%A, %B %d %Y • %H:%M")${RESET}"
+echo

@@ -1,29 +1,44 @@
 [global]
-width = 280 
-offset = 15x35
-
+width = 280
+offset = (15, 35)
 padding = 10
 horizontal_padding = 10
 frame_width = 1
 gap_size = 3
-font = "MesloLGS NF 10"
-
+font = Iosevka Custom 10
 corner_radius = 10
 
 background = "#141414"
 foreground = "#e0def4"
+frame_color = "#26233a"
+
+# Show 4 at once
+indicate_hidden = yes
+max_icon_size = 64
+icon_position = left
+
+# Optional extras
+alignment = left
+show_age_threshold = 60
+mouse_left_click = close_current
+mouse_middle_click = do_action
+mouse_right_click = close_all
 
 [urgency_low]
 background = "#141414"
-highlight = "#31748f"
+foreground = "#e0def4"
 frame_color = "#26233a"
+highlight = "#31748f"
 
 [urgency_normal]
 background = "#141414"
-highlight = "#f6c177"
+foreground = "#e0def4"
 frame_color = "#26233a"
+highlight = "#f6c177"
 
 [urgency_critical]
-background = "141414"
-highlight = "#eb6f92"
+background = "#141414"
+foreground = "#e0def4"
 frame_color = "#26233a"
+highlight = "#eb6f92"
+

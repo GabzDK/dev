@@ -4,8 +4,8 @@ export EDITOR='nvim'
 export PATH="$HOME/.local/bin:$PATH"
 export TERMINAL='com.mitchellh.ghostty'
 export BROWSER='firefox'
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+XCURSOR_SIZE=40
 
 # fnm
 FNM_PATH="/home/kali/.local/share/fnm"
@@ -13,3 +13,4 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/kali/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+. "$HOME/.cargo/env"
