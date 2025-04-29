@@ -27,9 +27,14 @@ exec --no-startup-id dex --autostart --environment i3
 # GET DEM BORDERS OUT OF HEREc:w
 #
 # Thanks Childz
-# for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 2
                           # class                 border  backgr. text    indicator child_border
-# for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
+for_window [class="^.*"] client.focused          #77dd77 #285577 #ffffff #2e9ef4   #285577
+
+# gaps
+gaps inner 10
+gaps outer 5
+smart_gaps on
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -63,6 +68,8 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id st 
+#emacs
+bindsym $mod+shift+E exec --no-startup-id emacs
 # pooooostman 
 bindsym $mod+shift+P exec --no-startup-id flatpak run com.getpostman.Postman
 
@@ -78,7 +85,7 @@ bindsym $mod+shift+s exec --no-startup-id screen
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
+# .desktop fNNile. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
@@ -173,7 +180,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

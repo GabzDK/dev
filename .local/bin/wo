@@ -7,8 +7,8 @@ DIR3="/home/kali/work/fretemax-workspace/"
 
 # Start a new tmux session with the first window
 tmux new-session -d -s $SESSION_NAME
-# Navigate to DIR3 and run nvim in the first window
-tmux send-keys -t $SESSION_NAME:1 "cd $DIR3 && nvim" C-m
+# Navigate to DIR3 and run hx . in the first window
+tmux send-keys -t $SESSION_NAME:1 "cd $DIR3 && hx ." C-m
 
 # Create a window for fretemax-lambdas
 tmux new-window -t $SESSION_NAME
@@ -18,7 +18,7 @@ tmux send-keys -t $SESSION_NAME:2 "cd $DIR1 && npm run start" C-m
 tmux new-window -t $SESSION_NAME
 tmux send-keys -t $SESSION_NAME:3 "cd $DIR2 && npm run dev" C-m
 
-# Switch back to the first window (nvim)
+# Switch back to the first window (hx .)
 tmux select-window -t $SESSION_NAME:1
 
 # Attach to the tmux session

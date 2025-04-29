@@ -4,12 +4,7 @@ export ZSH="$HOME/.config/zsh/oh-my-zsh"
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 plugins=(git fast-syntax-highlighting  zsh-autosuggestions zsh-syntax-highlighting fzf )
 
-# num_dirs=2 
-# truncated_path="%F{white}%$num_dirs~%f "
-# decoration="%F{green}󰘧"
-# Left part of prompt
-# PROMPT='$decoration $truncated_path'
-# ZSH_THEME="bureau"
+# ZSH_THEME="gentoo"
 
 setopt prompt_subst
 
@@ -133,6 +128,7 @@ bindkey '^F' fzf-cd-widget
 source <(fzf --zsh)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export HELIX_RUNTIME=$HOME/chad/helix/runtime
 
 # Rust baby
 . "$HOME/.cargo/env"

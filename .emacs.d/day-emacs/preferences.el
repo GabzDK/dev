@@ -1,0 +1,26 @@
+(set-frame-font "Iosevka 16" nil t)
+
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(scroll-bar-mode 0)
+(column-number-mode 1)
+(show-paren-mode 1)
+(global-display-line-numbers-mode t)
+(setq use-package-always-ensure t)
+
+(setq-default inhibit-splash-screen t
+              inhibt-startup-message t
+              make-backup-files nil
+              tab-width 4
+              indent-tabs-mode nil
+              compilation-scroll-output t
+              display-line-numbers-type 'relative
+              initial-scratch-message "")
+
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))

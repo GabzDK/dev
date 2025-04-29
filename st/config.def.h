@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 #define TRUE_COLOR 1
-static char *font = "Iosevka Custom:pixelsize=14:antialias=true:autohint=true";
+static char *font = "Iosevka:pixelsize=16:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
