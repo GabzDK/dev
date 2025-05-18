@@ -1,0 +1,8 @@
+theme = Monokai Classic 
+background-opacity = 0.85
+
+shell-integration-features = no-cursor,no-sudo,no-title
+gtk-titlebar = false
+window-decoration = false
+
+confirm-close-surface = false

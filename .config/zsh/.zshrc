@@ -1,43 +1,25 @@
-# ZSH STUFF
-# Path to your Oh My Zsh installation.
+# Path to Oh My Zsh installation
 export ZSH="$HOME/.config/zsh/oh-my-zsh"
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-plugins=(git fast-syntax-highlighting  zsh-autosuggestions zsh-syntax-highlighting fzf )
+zstyle ':omz:update' mode reminder
 
-# ZSH_THEME="gentoo"
+# Theme
+ZSH_THEME="gentoo"
 
-setopt prompt_subst
+# Plugins (optimized)
+plugins=(git fzf) # Core plugins only; others loaded asynchronously
 
-FG_USER="%F{#86c1b9}"    # Teal
-FG_HOST="%F{#86c1b9}"    # Teal
-FG_DIR="%F{#ffdd33}"     # Yellow
-FG_GIT="%F{#f6aa11}"     # Orange
-FG_PROMPT="%F{#f4f4ff}"  # Beige
-RESET="%f"
-
-# Git branch function
-git_branch() {
-  local branch
-  branch=$(git symbolic-ref --short HEAD 2>/dev/null)
-  [[ -n "$branch" ]] && echo " ${FG_GIT}(${branch})${RESET}"
-}
-
-# Prompt setup
-PROMPT='${FG_USER}%n${RESET}@${FG_HOST}%m${RESET} ${FG_DIR}%~${RESET}$(git_branch)
-λ '
-
-
+# Source Oh My Zsh (minimal)
 source $ZSH/oh-my-zsh.sh
 
+# Start X if conditions met (unchanged)
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec startx
 fi
 
-# History
+# History (optimized for performance)
 HISTSIZE=5000
+SAVEHIST=5000
 HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
@@ -46,97 +28,70 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=blue'
-
-# sudo not required for some system commands
-for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
-	alias $command="sudo $command"
-done; unset command
-
 # Path
-if [ -d "$HOME/.local/bin" ] ;
-  then PATH="$HOME/.local/bin:$PATH"
-fi
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 
-# Aliases
-alias cal="khal --color calendar"
-    alias fetch="$HOME/.local/bin/fetch"
+# Asynchronous plugin loading
+async_load() {
+  # Load fast-syntax-highlighting
+  [ -f "$ZSH/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ] && source "$ZSH/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+  # Load zsh-autosuggestions
+  [ -f "$ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+}
+async_load &!
+
+# Aliases (consolidated)
+# Sudo commands
+alias mount='sudo mount' umount='sudo umount' sv='sudo sv' pacman='sudo pacman' updatedb='sudo updatedb' su='sudo su' shutdown='sudo shutdown' poweroff='sudo poweroff' reboot='sudo reboot'
 
 # Verbosity
-alias \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	rm="rm -vI" \
-	bc="bc -ql" \
-	rsync="rsync -vrPlu" \
-	mkd="mkdir -pv" \
+alias cp='cp -iv' mv='mv -iv' rm='rm -vI' bc='bc -ql' rsync='rsync -vrPlu' mkd='mkdir -pv'
 
-    
-# Colorize commands when possible.
-alias \
-	grep="grep --color=auto" \
-	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi" \
-	ip="ip -color=auto"
+# Colorized commands
+alias grep='grep --color=auto' diff='diff --color=auto' ccat='highlight --out-format=ansi' ip='ip -color=auto'
 
-# These common commands are just too long! Abbreviate them.
-alias \
-	ka="killall" \
-	g="git" \
-	sdn="shutdown -h now" \
-	e="$EDITOR" \
-	v="$EDITOR" \
-	p="pacman" \
-    vim="nvim" \
+# Shortcuts
+alias ka='killall' g='git' sdn='shutdown -h now' e="$EDITOR" v="$EDITOR" p='pacman' vim='nvim'
 
-# get fastest mirrors
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+# Mirrors
+alias mirror='sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist'
+alias mirrord='sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist'
+alias mirrors='sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist'
+alias mirrora='sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist'
 
-# ps
-alias psa="ps auxf"
-alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias psmem='ps auxf | sort -nr -k 4'
-alias pscpu='ps auxf | sort -nr -k 3'
+# Process management
+alias psa='ps auxf' psgrep='ps aux | grep -v grep | grep -i -e VSZ -e' psmem='ps auxf | sort -nr -k 4' pscpu='ps auxf | sort -nr -k 3'
 
-# get error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
+# Journalctl
+alias jctl='journalctl -p 3 -xb'
 
-#Changing "ls" to "eza"
-alias ls='eza -al --icons --color=always --group-directories-first' # my preferred listing
-alias la='eza -a --icons --color=always --group-directories-first'  # all files and dirs
-alias ll='eza -l --icons --color=always --group-directories-first'  # long format
-alias lt='eza -aT --icons --color=always --group-directories-first' # tree listing
-alias l.='eza -al --icons --color=always --group-directories-first ../' # ls on the PARENT directory
-alias l..='eza -al -- icons--color=always --group-directories-first ../../' # ls on directory 2 levels up
-alias l...='eza -al --icons --color=always --group-directories-first ../../../' # ls on directory 3 levels up
-
+# Eza aliases (simplified with function)
+ls_parent() {
+  local levels=${1:-1}
+  local path="../"
+  for ((i=1; i<levels; i++)); do path+="../"; done
+  eza -al --icons --color=always --group-directories-first "$path"
+}
+alias ls='eza -al --icons --color=always --group-directories-first'
+alias la='eza -a --icons --color=always --group-directories-first'
+alias ll='eza -l --icons --color=always --group-directories-first'
+alias lt='eza -aT --icons --color=always --group-directories-first'
+alias l.='ls_parent 1'
+alias l..='ls_parent 2'
+alias l...='ls_parent 3'
 
 # Shell integrations
 export MANPAGER='nvim +Man!'
 source <(zoxide init --cmd cd zsh)
-# Bind Ctrl+F to the fzf directory search
 bindkey '^F' fzf-cd-widget
 source <(fzf --zsh)
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-export HELIX_RUNTIME=$HOME/chad/helix/runtime
 
-
-# fnm
-FNM_PATH="/home/kali/.local/share/fnm"
+# fnm (optimized)
+FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/kali/.local/share/fnm:$PATH"
-  eval "`fnm env`"
+  export PATH="$FNM_PATH:$PATH"
+  eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
-export PATH=$PATH:~/.config/emacs/bin
-
+# Compile .zshrc for faster loading
+[ -f ~/.zshrc.zwc ] || zcompile ~/.config/zsh/.zshrc

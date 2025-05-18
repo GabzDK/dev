@@ -12,7 +12,7 @@ static const char col_gray1[] = "#222222";
 static const char col_gray2[] = "#444444";
 static const char col_gray3[] = "#bbbbbb";
 static const char col_gray4[] = "#eeeeee";
-static const char col_cyan[] = "#005577";
+static const char col_cyan[] = "#a08d4e";
 static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = {col_gray3, col_gray1, col_gray2},
@@ -69,8 +69,9 @@ static char dmenumon[2] =
 static const char *dmenucmd[] = {
     "dmenu_run", "-m",      dmenumon, "-fn",    dmenufont, "-nb",     col_gray1,
     "-nf",       col_gray3, "-sb",    col_cyan, "-sf",     col_gray4, NULL};
-static const char *termcmd[] = {"st", NULL};
+static const char *termcmd[] = {"ghostty", NULL};
 static const char *editor[] = {"emacs-30.1", NULL};
+static const char *web[] = {"brave", NULL};
 
 // Audio
 static const char *upvol[] = {"/usr/bin/pactl", "set-sink-volume",
@@ -90,6 +91,7 @@ static const Key keys[] = {
     /* modifier                     key        function        argument */
     {MODKEY, XK_d, spawn, {.v = dmenucmd}},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
+    {MODKEY, XK_w, spawn, {.v = web}},
     {0, XK_Print, spawn, {.v = screenshot}},
     {MODKEY | ShiftMask, XK_e, spawn, {.v = editor}},
     {MODKEY, XK_b, togglebar, {0}},
