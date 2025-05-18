@@ -130,9 +130,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 export HELIX_RUNTIME=$HOME/chad/helix/runtime
 
-# Rust baby
-. "$HOME/.cargo/env"
-
 
 # fnm
 FNM_PATH="/home/kali/.local/share/fnm"
@@ -141,4 +138,5 @@ if [ -d "$FNM_PATH" ]; then
   eval "`fnm env`"
 fi
 
-fetch
+export PATH=$PATH:~/.config/emacs/bin
+
