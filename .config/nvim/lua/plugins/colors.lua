@@ -1,5 +1,5 @@
 function ColorMyPencils(color, transparent)
-  color = color or "gruber-darker"
+  color = color or "rose-pine-moon"
   transparent = transparent ~= false -- default to true
   vim.cmd.colorscheme(color)
 
@@ -37,9 +37,8 @@ return {
     },
   },
   {
-    "blazkowolf/gruber-darker.nvim",
+    "NTBBloodbath/doom-one.nvim",
     config = function()
-      require("gruber-darker").setup({})
       ColorMyPencils()
     end,
   },

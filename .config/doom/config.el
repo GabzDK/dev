@@ -21,18 +21,12 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 16))
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 16))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'monokai-pro-classic)
-
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -70,9 +64,18 @@
       :n "C-u" (lambda () (interactive) (evil-scroll-up 0) (evil-scroll-line-to-center nil)))
 
 (map! :n "C-x C-q" #'kill-current-buffer
-      :n "C-c C-t" #'vterm)
+      :n "C-c C-t" #'vterm
+      :n "C-c C-r" #'doom/reload
+      :n "C-c C-q" #'doom/restart)
 
-
+(after! evil
+  (setq evil-default-cursor t) ;; disables per-state cursor
+  (setq evil-normal-state-cursor 'box)
+  (setq evil-insert-state-cursor 'box)
+  (setq evil-visual-state-cursor 'box)
+  (setq evil-replace-state-cursor 'box)
+  (setq evil-emacs-state-cursor 'box)
+  (setq evil-motion-state-cursor 'box))
 
 ;; To get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').

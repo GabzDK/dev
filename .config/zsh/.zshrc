@@ -3,18 +3,13 @@ export ZSH="$HOME/.config/zsh/oh-my-zsh"
 zstyle ':omz:update' mode reminder
 
 # Theme
-ZSH_THEME="gentoo"
+ZSH_THEME="robbyrussell"
 
 # Plugins (optimized)
 plugins=(git fzf) # Core plugins only; others loaded asynchronously
 
 # Source Oh My Zsh (minimal)
 source $ZSH/oh-my-zsh.sh
-
-# Start X if conditions met (unchanged)
-if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-  exec startx
-fi
 
 # History (optimized for performance)
 HISTSIZE=5000
@@ -91,6 +86,19 @@ FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
   eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
+#the doom slayer.
+export PATH="$HOME/.config/emacs/bin:$PATH" 
+
+# chadrust
+. "$HOME/.cargo/env"            # For sh/bash/zsh/ash/dash/pdksh
+
+# fnm
+FNM_PATH="/home/zeroday/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/zeroday/.local/share/fnm:$PATH"
+  eval "`fnm env`"
 fi
 
 # Compile .zshrc for faster loading
