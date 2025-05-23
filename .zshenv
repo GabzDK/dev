@@ -1,6 +1,6 @@
 export ZDOTDIR="$HOME/.config/zsh"
 export CM_LAUNCHER='dmenu'
-export EDITOR='emacs'
+export EDITOR='emacs-30.1'
 export PATH="$HOME/.local/bin:$PATH"
 export TERMINAL='st'
 export BROWSER='brave'

@@ -1,45 +1,35 @@
-# Path to Oh My Zsh installation
 export ZSH="$HOME/.config/zsh/oh-my-zsh"
 zstyle ':omz:update' mode reminder
 
 # Theme
-ZSH_THEME="gentoo"
+# ZSH_THEME="gentoo"
 
-# Plugins (optimized)
-plugins=(git fzf) # Core plugins only; others loaded asynchronously
+# Enable colors and change prompt:
+autoload -U colors && colors	# Load colors
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+setopt autocd		# Automatically cd into typed directory.
+stty stop undef		# Disable ctrl-s to freeze terminal.
+setopt interactive_comments
+
+# Plugins 
+plugins=(git fzf zsh-syntax-highlighting fast-syntax-highlighting zsh-autosuggestions) 
 
 # Source Oh My Zsh (minimal)
 source $ZSH/oh-my-zsh.sh
 
-# History (optimized for performance)
-HISTSIZE=5000
-SAVEHIST=5000
-HISTFILE=~/.zsh_history
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+# History in cache directory:
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/history"
+setopt inc_append_history
 
 #xorg 
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec startx
 fi
 
-
 # Path
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
-
-# Asynchronous plugin loading
-async_load() {
-  # Load fast-syntax-highlighting
-  [ -f "$ZSH/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ] && source "$ZSH/custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-  # Load zsh-autosuggestions
-  [ -f "$ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-}
-async_load &!
 
 # Aliases (consolidated)
 # Sudo commands
@@ -99,13 +89,3 @@ export PATH="$HOME/.config/emacs/bin:$PATH"
 
 # chadrust
 . "$HOME/.cargo/env"            # For sh/bash/zsh/ash/dash/pdksh
-
-# fnm
-FNM_PATH="/home/zeroday/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/zeroday/.local/share/fnm:$PATH"
-  eval "`fnm env`"
-fi
-
-# Compile .zshrc for faster loading
-[ -f ~/.zshrc.zwc ] || zcompile ~/.config/zsh/.zshrc
