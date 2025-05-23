@@ -3,7 +3,7 @@ export ZSH="$HOME/.config/zsh/oh-my-zsh"
 zstyle ':omz:update' mode reminder
 
 # Theme
-ZSH_THEME="robbyrussell"
+ZSH_THEME="gentoo"
 
 # Plugins (optimized)
 plugins=(git fzf) # Core plugins only; others loaded asynchronously
@@ -22,6 +22,12 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
+
+#xorg 
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+  exec startx
+fi
+
 
 # Path
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"

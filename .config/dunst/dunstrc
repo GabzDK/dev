@@ -1,74 +1,37 @@
 [global]
-    ### Display ###
-    monitor = 0
-    follow = none
-    width = 250
-    height = (0, 80)
-    origin = top-right
-    offset = (10, 50)
-    scale = 0
-    notification_limit = 5
-
-    ### Geometry ###
-    progress_bar = true
-    progress_bar_height = 8
-    progress_bar_frame_width = 1
-    progress_bar_min_width = 120
-    progress_bar_max_width = 250
-
-    ### Text ###
-    font = Iosevka Nerd Font 12
-    line_height = 4
-    padding = 12
-    horizontal_padding = 12
-    text_icon_padding = 0
+    font = Monospace 10
+    frame_width = 1
+    frame_color = "#2a2a2a"
+    corner_radius = 8
     separator_height = 2
+    padding = 10
+    horizontal_padding = 10
+    background = "#1a1a1a"
+    foreground = "#d4d4d4"
+
+    # Enable or disable the progress bar
+    progress_bar = true
+    progress_bar_height = 4
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    progress_bar_corner_radius = 4
+    progress_bar_background = "#1a1a1a"
+    progress_bar_foreground = "#4a4a4a"
+
     separator_color = frame
 
-    ### Appearance ###
-    corner_radius = 12
-    transparency = 10
-    frame_width = 2
-    frame_color = "#1E1E1E"
-    background = "#2D2D2DE6"
-    foreground = "#FFFFFF"
-    highlight = "#007AFF"
-
-    ### Behavior ###
-    show_age_threshold = 60
-    sticky_history = yes
-    history_length = 20
-    dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/xdg-open
-    always_run_script = true
-    title = Dunst
-    class = Dunst
-    force_xwayland = false
-    force_xinerama = false
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
-
-    ### Shortcuts ###
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
-
 [urgency_low]
-    background = "#2D2D2DE6"
-    foreground = "#FFFFFF"
-    frame_color = "#1E1E1E"
-    timeout = 5
+    background = "#1a1a1a"
+    foreground = "#d4d4d4"
+    frame_color = "#2a2a2a"
 
 [urgency_normal]
-    background = "#2D2D2DE6"
-    foreground = "#FFFFFF"
-    frame_color = "#1E1E1E"
-    timeout = 10
+    background = "#1a1a1a"
+    foreground = "#d4d4d4"
+    frame_color = "#2a2a2a"
 
 [urgency_critical]
-    background = "#2D2D2DE6"
-    foreground = "#FF453A"
-    frame_color = "#FF453A"
-    timeout = 0
+    background = "#3a3a3a"
+    foreground = "#ffffff"
+    frame_color = "#2a2a2a"
