@@ -6,7 +6,7 @@ static const unsigned int gappx = 10;   /* gaps between windows */
 static const unsigned int snap = 32;    /* snap pixel */
 static const int showbar = 1;           /* 0 means no bar */
 static const int topbar = 1;            /* 0 means bottom bar */
-static const char *fonts[] = {"JetBrainsMono nerd Font:size=10"};
+static const char *fonts[] = {"Iosevka:size=10"};
 static char normbgcolor[] = "#222222";
 static char normbordercolor[] = "#444444";
 static char normfgcolor[] = "#bbbbbb";
@@ -29,6 +29,7 @@ static const Rule rules[] = {
      */
     /* class      instance    title       tags mask     isfloating   monitor */
     {"Gimp", NULL, NULL, 0, 1, -1},
+    {"qalculate-gtk", NULL, NULL, 0, 1, -1},
     {"Firefox", NULL, NULL, 1 << 8, 0, -1},
 };
 
@@ -67,7 +68,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = {"dmenu_run", NULL};
 static const char *termcmd[] = {"st", NULL};
 static const char *editor[] = {"emacs-30.1", NULL};
-static const char *web[] = {"brave", NULL};
+static const char *web[] = {"prime-run", "brave", NULL};
 
 // Audio
 static const char *upvol[] = {"/usr/bin/pactl", "set-sink-volume",
@@ -86,6 +87,7 @@ static const char *screenshot[] = {"flameshot", "gui", NULL};
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     {MODKEY, XK_d, spawn, {.v = dmenucmd}},
+    {MODKEY, XK_F10, spawn, SHCMD("gpu-run")},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_w, spawn, {.v = web}},
     {0, XK_Print, spawn, {.v = screenshot}},

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# List of apps you want to launch with GPU
+apps="discord
+steam
+brave"
+
+choice=$(echo "$apps" | dmenu -l 10 -i -p "Launch with GPU:")
+
+if [ -n "$choice" ]; then
+    prime-run "$choice"
+fi
+
