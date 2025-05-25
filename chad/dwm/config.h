@@ -7,12 +7,12 @@ static const unsigned int snap = 32;    /* snap pixel */
 static const int showbar = 1;           /* 0 means no bar */
 static const int topbar = 1;            /* 0 means bottom bar */
 static const char *fonts[] = {"Iosevka:size=14"};
-static char normbgcolor[] = "#222222";
-static char normbordercolor[] = "#444444";
-static char normfgcolor[] = "#bbbbbb";
-static char selfgcolor[] = "#eeeeee";
-static char selbordercolor[] = "#770000";
-static char selbgcolor[] = "#005577";
+static char normbgcolor[] = "#2c2525";
+static char normbordercolor[] = "#403838";
+static char normfgcolor[] = "#c6a6a6";
+static char selfgcolor[] = "#fff1f3";
+static char selbordercolor[] = "#fd6c85";
+static char selbgcolor[] = "#403838";
 static char *colors[][3] = {
     /*               fg           bg           border   */
     [SchemeNorm] = {normfgcolor, normbgcolor, normbordercolor},
@@ -51,16 +51,16 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY, TAG)                                                      \
-    {MODKEY, KEY, view, {.ui = 1 << TAG}},                                     \
-        {MODKEY | ControlMask, KEY, toggleview, {.ui = 1 << TAG}},             \
-        {MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},                      \
-        {MODKEY | ControlMask | ShiftMask, KEY, toggletag, {.ui = 1 << TAG}},
+  {MODKEY, KEY, view, {.ui = 1 << TAG}},                                       \
+      {MODKEY | ControlMask, KEY, toggleview, {.ui = 1 << TAG}},               \
+      {MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},                        \
+      {MODKEY | ControlMask | ShiftMask, KEY, toggletag, {.ui = 1 << TAG}},
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd)                                                             \
-    {                                                                          \
-        .v = (const char *[]) { "/bin/sh", "-c", cmd, NULL }                   \
-    }
+  {                                                                            \
+    .v = (const char *[]) { "/bin/sh", "-c", cmd, NULL }                       \
+  }
 #include "movestack.c"
 #include <X11/XF86keysym.h>
 
